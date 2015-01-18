@@ -13,6 +13,7 @@ if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
   REMOTE_VERSION=`echo $VERSION | sed "s/\\./\_/g"`
 #  wget http://sourceforge.net/projects/boost/files/boost/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz/download -O $SRC_DIR/$SOURCE_FILE
   wget 'http://downloads.sourceforge.net/projects/$NAME/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz?use_mirror=tenet' -O $SRC_DIR/$SOURCE_FILE
+  ls -lht $SRC_DIR
 fi
 
 tar xvzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
