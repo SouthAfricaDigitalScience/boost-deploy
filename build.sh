@@ -14,8 +14,9 @@ if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
   mkdir -p $SRC_DIR
   REMOTE_VERSION=`echo $VERSION | sed "s/\\./\_/g"`
 #  wget http://sourceforge.net/projects/boost/files/boost/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz/download -O $SRC_DIR/$SOURCE_FILE
-  echo "Getting it from sourceforge with the following command: \n wget http://downloads.sourceforge.net/projects/$NAME/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz -O $SRC_DIR/$SOURCE_FILE"
-  wget http://downloads.sourceforge.net/projects/$NAME/file/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz -O $SRC_DIR/$SOURCE_FILE
+  echo "Getting it from sourceforge with the following command:"
+  echo " wget http://downloads.sourceforge.net/project/$NAME/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz -O $SRC_DIR/$SOURCE_FILE"
+  wget http://downloads.sourceforge.net/project/$NAME/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz -O $SRC_DIR/$SOURCE_FILE
   ls -lht $SRC_DIR
 fi
 
