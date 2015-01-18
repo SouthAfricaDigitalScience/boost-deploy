@@ -6,11 +6,13 @@ CPUS=$(cat /proc/cpuinfo |grep "^processor"|wc -l)
 module load ci
 module add gcc/4.8.2
 
+# Direct link from TENET is http://downloads.sourceforge.net/project/boost/boost/1.57.0/boost_1_57_0.tar.gz?use_mirror=tenet
 if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
   echo "tarball's not here ! let's get it"
   mkdir -p $SRC_DIR
   REMOTE_VERSION=`echo $VERSION | sed "s/\\./\_/g"`
-  wget http://sourceforge.net/projects/boost/files/boost/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz/download -O $SRC_DIR/$SOURCE_FILE
+#  wget http://sourceforge.net/projects/boost/files/boost/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz/download -O $SRC_DIR/$SOURCE_FILE
+  wget 'http://downloads.sourceforge.net/projects/$NAME/$NAME/$VERSION/${NAME}_${REMOTE_VERSION}.tar.gz?use_mirror=tenet' -O $SRC_DIR/$SOURCE_FILE
 fi
 
 tar xvzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
