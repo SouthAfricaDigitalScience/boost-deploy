@@ -20,14 +20,15 @@ module-whatis "Sets the environment for using $NAME ($VERSION.)"
 module load gcc/4.8.2
 setenv BOOST_VERSION $VERSION
 set BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
-prepend-path PATH \$BOOST_DIR/include
+prepend-path CPATH \$BOOST_DIR/include
 prepend-path LD_LIBRARY_PATH \$BOOST_DIR/lib
 prepend-path LD_LIBRARY_PATH \$BOOST_DIR/lib64
 MODULE_FILE
 ) > modules/$VERSION
 mkdir -p $LIBRARIES_MODULES/$NAME
 cp modules/$VERSION $LIBRARIES_MODULES/$NAME
-
+module avail
+module add $NAME/$VERSION
 which g++
 cd $WORKSPACE
 g++ hello-world.cpp

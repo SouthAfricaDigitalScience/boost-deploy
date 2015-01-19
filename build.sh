@@ -26,5 +26,5 @@ ls $WORKSPACE
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
 mv $WORKSPACE/${NAME}_${REMOTE_VERSION} $WORKSPACE/$NAME-$VERSION
 cd $WORKSPACE/$NAME-$VERSION
-./bootstrap.sh --prefix=$SOFT_DIR
+./bootstrap.sh --prefix=$SOFT_DIR/$NAME/$VERSION
 ./b2 -d+2 stage threading=multi link=shared
