@@ -1,7 +1,7 @@
 #!/bin/bash
 module add ci
 module add gcc/4.8.2
-cd $WORKSPACE/$NAME-$VERSION
+cd $WORKSPACE/$NAME-$VERSION/
 ./b2 install
 ls
 
@@ -29,6 +29,6 @@ mkdir -p $LIBRARIES_MODULES/$NAME
 cp modules/$VERSION $LIBRARIES_MODULES/$NAME
 
 which g++
-
+cd $WORKSPACE
 g++ hello-world.cpp
 ./a.out
