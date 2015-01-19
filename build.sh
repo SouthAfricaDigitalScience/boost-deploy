@@ -1,12 +1,13 @@
 #!/bin/bash
 # boost has a different naming convention to most, for it's source tarballs. Instead of using x.y.z it uses x_y_z
 # We have to change the name of the tarbal then, later
+module add ci
+module add gcc/4.8.2
+
 SOURCE_FILE=$NAME-$VERSION.tar.gz
 echo "Source file is $SOURCE_FILE"
 echo "Source dir is $SRC_DIR"
 CPUS=$(cat /proc/cpuinfo |grep "^processor"|wc -l)
-module add ci
-module add gcc/4.8.2
 REMOTE_VERSION=`echo $VERSION | sed "s/\\./\_/g"`
 # Direct link from TENET is http://downloads.sourceforge.net/project/boost/boost/1.57.0/boost_1_57_0.tar.gz?use_mirror=tenet
 if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
@@ -23,7 +24,7 @@ fi
 tar xzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
 ls $WORKSPACE
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
-mv $WORKSPACE/${NAME}_${{ REMOTE_VERSION }} $WORKSPACE/$NAME-$VERSION
+mv $WORKSPACE/${NAME}_${REMOTE_VERSION} $WORKSPACE/$NAME-$VERSION
 cd $WORKSPACE/$NAME-$VERSION
 ./bootstrap.sh --prefix=$SOFT_DIR
 ./b2 -d+2 stage threading=multi link=shared
