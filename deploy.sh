@@ -3,7 +3,7 @@
 module add deploy
 
 # add the dependency modules for the deploy
-module add bzlib2
+module add bzip2
 module  add zlib
 module add gcc/${GCC_VERSION}
 module add  openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
@@ -24,7 +24,7 @@ proc ModulesHelp { } {
     puts stderr "       that the [module-info name] module is not available"
 }
 module add zlib
-module add bzlib2
+module add bzip2
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module-whatis   "$NAME $VERSION : See https://github.com/SouthAfricaDigitalScience/${name}-deploy"

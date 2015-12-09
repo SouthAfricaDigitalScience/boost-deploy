@@ -1,7 +1,7 @@
 #!/bin/bash -e
 . /etc/profile.d/module.sh
 module add ci
-module add bzlib2
+module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
@@ -20,7 +20,7 @@ proc ModulesHelp { } {
   puts stderr "\\tAdds $NAME ($VERSION.) to your environment."
 }
 module-whatis "Sets the environment for using $NAME ($VERSION.) Built with GCC ${GCC_VERSION} and OpenMPI Version ${OPENMPI_VERSION}"
-module add bzlib2
+module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
