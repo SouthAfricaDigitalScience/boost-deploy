@@ -5,7 +5,7 @@ module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-cd ${WORKSPACE}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 
 # There is a check missing
 ./b2 install
@@ -37,5 +37,5 @@ module avail
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 which g++
 cd ${WORKSPACE}
-c++ -I${WORKSPACE}/${NAME}-${VERSION}/libs hello-world.cpp
+c++ -I${WORKSPACE}/${NAME}_${REMOTE_VERSION}/libs hello-world.cpp
 ./a.out

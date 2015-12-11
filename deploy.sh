@@ -7,11 +7,14 @@ module add bzip2
 module  add zlib
 module add gcc/${GCC_VERSION}
 module add  openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-cd ${WORKSPACE}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
+echo "Cleaning"
 ./b2 --clean
-
+echo "Starting deploy build"
 ./b2 -d+2 stage threading=multi link=shared --debug-configuration --prefix=--prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+echo "starting deploy install"
 ./b2 -d+2 install
+echo "Creating module"
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 # Now, create the module file for deployment
 (

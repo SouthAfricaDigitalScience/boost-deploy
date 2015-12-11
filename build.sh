@@ -40,8 +40,8 @@ fi
 tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 ls ${WORKSPACE}
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
-mv ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
-cd ${WORKSPACE}/${NAME}-${VERSION}
+#mv -n --strip-trailing-slashes ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 ./bootstrap.sh --prefix=$SOFT_DIR/${NAME}/${VERSION}-${GCC_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
