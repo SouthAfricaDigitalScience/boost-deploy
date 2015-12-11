@@ -3,7 +3,7 @@
 # boost has a different naming convention to most, for it's source tarballs. Instead of using x.y.z it uses x_y_z
 # We have to change the name of the tarbal then, later
 module add ci
-module add bzlib2
+module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
@@ -45,4 +45,8 @@ cd ${WORKSPACE}/${NAME}-${VERSION}
 ./bootstrap.sh --prefix=$SOFT_DIR/${NAME}/${VERSION}-${GCC_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
-./b2 -d+2 stage threading=multi link=shared --debug-configuration --prefix=--prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+./b2 -d+2 stage \
+threading=multi \
+link=shared \
+--debug-configuration  \
+--prefix=--prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}

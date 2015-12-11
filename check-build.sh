@@ -1,5 +1,5 @@
 #!/bin/bash -e
-. /etc/profile.d/module.sh
+. /etc/profile.d/modules.sh
 module add ci
 module add bzip2
 module add zlib
