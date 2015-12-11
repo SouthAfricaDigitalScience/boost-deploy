@@ -5,6 +5,8 @@ module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
+
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 
 # There is a check missing
