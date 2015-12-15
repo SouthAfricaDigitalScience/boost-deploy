@@ -27,10 +27,10 @@ module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
-set BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
+set BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 prepend-path CPATH ${BOOST_DIR}/include
-prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/lib
-prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/lib64
+prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/
+prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
@@ -39,5 +39,5 @@ module avail
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 which g++
 cd ${WORKSPACE}
-c++ -I${WORKSPACE}/${NAME}_${REMOTE_VERSION}/libs hello-world.cpp
+c++ -I${BOOST_DIR} -L${BOOST_DIR} hello-world.cpp
 ./a.out
