@@ -33,7 +33,7 @@ module add bzip2
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module-whatis   "$NAME $VERSION : See https://github.com/SouthAfricaDigitalScience/${name}-deploy"
-set BOOST_DIR $::env(CVMFS_DIR)$/::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+setenv BOOST_DIR $::env(CVMFS_DIR)$/::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 prepend-path CFLAGS ${BOOST_DIR}/include
 prepend-path PATH ${BOOST_DIR}
 prepend-path LD_LIBRARY_PATH ${BOOST_DIR}
