@@ -1,8 +1,11 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
-module add ci
+module add deploy
 module add bzip2
 module add zlib
+module add gmp
+module add mpfr
+module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
@@ -10,7 +13,7 @@ REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 
 # There is a check missing
-./b2 install
+./b2 install 
 ls
 mkdir -p modules
 (
@@ -27,9 +30,9 @@ module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
-set BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+setenv BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+setenv CFLAGS "$CFLAGS -I::env(BOOST_DIR) -L::env(BOOST_DIR)
 prepend-path CPATH ${BOOST_DIR}/include
-prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/
 prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
@@ -39,5 +42,6 @@ module avail
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 which g++
 cd ${WORKSPACE}
-c++ -I${BOOST_DIR} -L${BOOST_DIR} hello-world.cpp
+ls -lht ${BOOST_DIR}
+c++ -I${BOOST_DIR} -L${BOOST_DIR}/lib hello-world.cpp
 ./a.out
