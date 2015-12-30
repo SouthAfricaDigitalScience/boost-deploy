@@ -44,10 +44,10 @@ module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module-whatis   "$NAME $VERSION : See https://github.com/SouthAfricaDigitalScience/${name}-deploy"
-setenv BOOST_DIR $::env(CVMFS_DIR)$/::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 setenv BOOST_VERSION $VERSION
-prepend-path CFLAGS "-I${BOOST_DIR} -L${BOOST_DIR}"
-prepend-path PATH ${BOOST_DIR}/bin
-prepend-path LD_LIBRARY_PATH ${BOOST_DIR}
+prepend-path CFLAGS "-I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
+prepend-path PATH $::env(BOOST_DIR)/bin
+prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)/lib
 MODULE_FILE
 ) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
