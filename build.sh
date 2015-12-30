@@ -43,6 +43,7 @@ ls ${WORKSPACE}
 #mv -n --strip-trailing-slashes ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 mkdir build-${BUILD_NUMBER}
+cd build-${BUILD_NUMBER}
 ../bootstrap.sh --prefix=$SOFT_DIR/${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam

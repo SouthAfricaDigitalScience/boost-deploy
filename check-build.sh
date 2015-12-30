@@ -10,10 +10,10 @@ module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
-cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
+cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/build-${BUILD_NUMBER}
 
 # There is a check missing
-./b2 install 
+./b2 install
 ls
 mkdir -p modules
 (
