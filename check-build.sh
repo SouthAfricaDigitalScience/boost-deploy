@@ -31,7 +31,7 @@ module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
 setenv BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-setenv CFLAGS "$CFLAGS -I::env(BOOST_DIR) -L::env(BOOST_DIR)
+setenv CFLAGS "$CFLAGS -I::env(BOOST_DIR) -L::env(BOOST_DIR)"
 prepend-path CPATH ${BOOST_DIR}/include
 prepend-path LD_LIBRARY_PATH ${BOOST_DIR}/
 MODULE_FILE
