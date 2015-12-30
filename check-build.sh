@@ -1,6 +1,6 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
-module add deploy
+module add ci
 module add bzip2
 module add zlib
 module add gmp
@@ -13,7 +13,8 @@ REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/
 
 # There is a check missing
-./b2 install
+./b2 install --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+
 ls
 mkdir -p modules
 (
@@ -40,8 +41,10 @@ mkdir -p ${LIBRARIES_MODULES}/${NAME}
 cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES_MODULES}/${NAME}
 module avail
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
 which g++
 cd ${WORKSPACE}
+echo "BOOST DIR is ${BOOST_DIR} ; SOFT_DIR is ${SOFT_DIR}
 ls -lht ${BOOST_DIR}
 c++ -I${BOOST_DIR} -L${BOOST_DIR}/lib hello-world.cpp
 ./a.out

@@ -23,7 +23,7 @@ link=shared \
 --debug-configuration \
 --prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "starting deploy install"
-./b2 -d+2 install
+./b2 -d+2 install --prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "Creating module"
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 # Now, create the module file for deployment

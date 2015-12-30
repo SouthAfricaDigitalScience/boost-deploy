@@ -42,7 +42,7 @@ ls ${WORKSPACE}
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
 #mv -n --strip-trailing-slashes ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
-./bootstrap.sh --prefix=$SOFT_DIR/${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+./bootstrap.sh --prefix=$SOFT_DIR/${NAME}-${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
 ./b2 -d+2 stage \
