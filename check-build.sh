@@ -31,7 +31,7 @@ module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
-setenv BOOST_DIR $::env(SOFT_DIR)/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+setenv BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
 prepend-path CPATH $::env(BOOST_DIR)/include
 prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)
