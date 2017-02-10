@@ -31,7 +31,7 @@ module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
-setenv BOOST_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_ROOT $::env(BOOST_DIR)
 setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
 prepend-path CPATH $::env(BOOST_DIR)/include
@@ -40,7 +40,7 @@ MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES_MODULES}/${NAME}
-module avail
+module avail ${NAME}
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
 which g++
