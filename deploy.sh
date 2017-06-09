@@ -4,12 +4,9 @@ module add deploy
 
 # add the dependency modules for the deploy
 module add bzip2
-module add zlib
-module add gmp
-module add mpfr
-module add mpc
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add python/2.7.13
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/
@@ -25,7 +22,7 @@ link=shared \
 echo "starting deploy install"
 ./b2 -d+2 install --prefix=${SOFT_DIR}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "Creating module"
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${LIBRARIES}/${NAME}
 # Now, create the module file for deployment
 (
 cat <<MODULE_FILE
@@ -51,4 +48,13 @@ prepend-path CFLAGS                     "-I$::env(BOOST_DIR)/include -L$::env(BO
 prepend-path PATH                          $::env(BOOST_DIR)/bin
 prepend-path LD_LIBRARY_PATH  $::env(BOOST_DIR)/lib
 MODULE_FILE
-) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+) > ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module avail ${NAME}
+module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
+which g++
+cd ${WORKSPACE}
+echo "BOOST DIR is ${BOOST_DIR} ; SOFT_DIR is ${SOFT_DIR}"
+ls -lht ${BOOST_DIR}
+c++ -I${BOOST_DIR} -L${BOOST_DIR}/lib hello-world.cpp
+./a.out

@@ -4,10 +4,9 @@
 # We have to change the name of the tarbal then, later
 module add ci
 module add bzip2
-module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-
+module add python/2.7.13
 mkdir -p ${WORKSPACE}
 mkdir -p ${SOFT_DIR}
 mkdir -p ${SRC_DIR}

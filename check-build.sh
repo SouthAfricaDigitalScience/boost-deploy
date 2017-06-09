@@ -2,11 +2,8 @@
 . /etc/profile.d/modules.sh
 module add ci
 module add bzip2
-module add zlib
-module add gmp
-module add mpfr
-module add mpc
 module add gcc/${GCC_VERSION}
+module add python/2.7.13
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
@@ -30,6 +27,7 @@ module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add python/2.7.13
 setenv BOOST_VERSION $VERSION
 setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_ROOT $::env(BOOST_DIR)
@@ -38,8 +36,8 @@ prepend-path CPATH $::env(BOOST_DIR)/include
 prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${LIBRARIES}/${NAME}
+cp modules/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} ${LIBRARIES}/${NAME}
 module avail ${NAME}
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
