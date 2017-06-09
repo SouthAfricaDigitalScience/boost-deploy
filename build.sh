@@ -6,7 +6,7 @@ module add ci
 module add bzip2
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add python/2.7.13
+module add python/2.7.13-gcc-${GCC_VERSION}
 mkdir -p ${WORKSPACE}
 mkdir -p ${SOFT_DIR}
 mkdir -p ${SRC_DIR}
