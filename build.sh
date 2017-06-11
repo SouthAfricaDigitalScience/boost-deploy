@@ -49,7 +49,7 @@ cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
 echo "Making python bindings"
-echo "using python :  : ${PYTHONHOME}/bin/python : ${PYTHONHOME}/include/python2.7  : ${PYTHONHOME}/lib/python2.7 ;" >> project-config.jam
+echo "using python : 2.7 : ${PYTHONHOME}/bin/python : ${PYTHONHOME}/include/  : ${PYTHONHOME}/lib/ ;" >> project-config.jam
 ./b2 -d+2 stage \
 threading=multi link=static,shared runtime-link=shared,shared \
   -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
