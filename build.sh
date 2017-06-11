@@ -54,6 +54,7 @@ echo "using python : 2.7 ;" >> project-config.jam
 threading=multi link=static,shared runtime-link=shared,shared \
   -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
   -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
+  -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
   --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
    --with-iostreams \
    --with-python
