@@ -35,7 +35,7 @@ module add bzip2
 module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add python/2.7.13
+module add python/2.7.13-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
 setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 setenv BOOST_ROOT $::env(BOOST_DIR)
