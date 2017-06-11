@@ -32,7 +32,6 @@ proc ModulesHelp { } {
 }
 module-whatis "Sets the environment for using $NAME ($VERSION.) Built with GCC ${GCC_VERSION} and OpenMPI Version ${OPENMPI_VERSION}"
 module add bzip2
-module add zlib
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
