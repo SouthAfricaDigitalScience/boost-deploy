@@ -53,5 +53,5 @@ which g++
 cd ${WORKSPACE}
 echo "BOOST DIR is ${BOOST_DIR} ; SOFT_DIR is ${SOFT_DIR}"
 ls -lht ${BOOST_DIR}
-c++ -I${BOOST_DIR} -L${BOOST_DIR}/lib hello-world.cpp
+c++ -I${BOOST_DIR}/include -L${BOOST_DIR}/lib hello-world.cpp
 ./a.out
