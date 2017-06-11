@@ -52,8 +52,8 @@ echo "Making python bindings"
 echo "using python : ${PYTHON_VERSION} : ${PYTHON_DIR} ;" >> project-config.jam
 ./b2 -d+2 stage \
 threading=multi link=shared runtime-link=shared \
-  -sBZLIB_PATH=${BZLIB_DIR} -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
-  -sBZIP2_BINARY=bz2 \
+  -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
+  -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
   --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
    --with-iostreams \
    --with-python
