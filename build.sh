@@ -52,7 +52,7 @@ echo "using python : ${PYTHON_VERSION} ;" >> project-config.jam
 ./b2 -d+2 stage \
 threading=multi link=shared runtime-link=shared \
   -sBZLIB_PATH=${BZLIB_DIR} -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
-  -sBZIP2_BINARY=bz2 -sBZIP2_INCLUDE=${BZLIB_DIR}/include -sBZIP2_LIBPATH=${BZLIB_DIR}/lib \
+  -sBZIP2_BINARY=bz2 \
   --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
    --with-iostreams \
   --with-atomic \
