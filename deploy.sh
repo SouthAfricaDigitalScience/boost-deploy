@@ -48,16 +48,16 @@ module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
 module-whatis   "$NAME $VERSION : See https://github.com/SouthAfricaDigitalScience/${name}-deploy"
-setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/${VERSION}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)/$::env(VERSION)-mpi-$::env(OPENMPI_VERSION)-gcc-$::env(GCC_VERSION)
 setenv BOOST_ROOT                      $::env(BOOST_DIR)
-setenv BOOST_VERSION                $VERSION
+setenv BOOST_VERSION                $::env(VERSION)
 prepend-path CFLAGS                     "-I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
 prepend-path PATH                          $::env(BOOST_DIR)/bin
 prepend-path LD_LIBRARY_PATH  $::env(BOOST_DIR)/lib
 MODULE_FILE
-) > ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+) > ${LIBRARIES}/${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module avail ${NAME}
-module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+module add ${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
 which g++
 cd ${WORKSPACE}
