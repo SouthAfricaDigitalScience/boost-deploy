@@ -11,7 +11,8 @@ module add python/2.7.13-gcc-${GCC_VERSION}
 mkdir -p ${WORKSPACE}
 mkdir -p ${SOFT_DIR}
 mkdir -p ${SRC_DIR}
-
+which python
+which python2
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 echo "Source file is ${SOURCE_FILE}"
 echo "Source dir is ${SRC_DIR}"
@@ -55,30 +56,29 @@ threading=multi link=shared runtime-link=shared \
   -sBZIP2_BINARY=bz2 \
   --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
    --with-iostreams \
-  --with-atomic \
-  --with-chrono \
-  --with-container \
-  --with-context \
-  --with-python \
-  --with-coroutine \
-  --with-coroutine2 \
-  --with-filesystem \
-  --with-date_time \
-  --with-exception \
-  --with-graph \
-  --with-graph_parallel \
-  --with-mpi \
-  --with-log \
-  --with-locale \
-  --with-system  \
-  --with-math \
-  --with-metaparse \
-  --with-program_options \
-  --with-test --with-thread \
-  --with-timer \
-  --with-type_erasure \
-  --with-wave \
-  --with-random \
-  --with-regex \
-  --with-signals \
-  --with-serialization
+   --with-python
+  #  --with-mpi
+  # --with-atomic \
+  # --with-chrono \
+  # --with-container \
+  # --with-context \
+  # --with-coroutine \
+  # --with-coroutine2 \
+  # --with-filesystem \
+  # --with-date_time \
+  # --with-exception \
+  # --with-graph \
+  # --with-graph_parallel \
+  # --with-log \
+  # --with-locale \
+  # --with-system  \
+  # --with-math \
+  # --with-program_options \
+  # --with-test --with-thread \
+  # --with-timer \
+  # --with-type_erasure \
+  # --with-wave \
+  # --with-random \
+  # --with-regex \
+  # --with-signals \
+  # --with-serialization
