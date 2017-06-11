@@ -65,7 +65,6 @@ threading=multi link=shared runtime-link=shared \
   --with-filesystem \
   --with-date_time \
   --with-exception \
-  --with-fiber \
   --with-graph \
   --with-graph_parallel \
   --with-mpi \
