@@ -2,15 +2,23 @@
 . /etc/profile.d/modules.sh
 module add ci
 module add bzip2
+module  add  readline
 module add gcc/${GCC_VERSION}
-module add python/2.7.13-gcc-${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add python/2.7.13-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/
 
 # There is a check missing
-./b2 install --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+./b2 -d+2 install \
+threading=multi link=shared runtime-link=shared \
+  -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
+  -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
+  --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+   --with-iostreams \
+   --with-python
+
 
 ls
 mkdir -p modules
