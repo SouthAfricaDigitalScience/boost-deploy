@@ -49,7 +49,7 @@ cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
 echo "Making python bindings"
-echo "using python : 2.7 ;" >> project-config.jam
+echo "using python : 2.7 : ${PYTHON_DIR}/bin/python2.7 : ${PYTHON_DIR}/include : ${PYTHON_DIR}/lib ;" >> project-config.jam
 ./b2 -d+2 stage \
 threading=multi link=static,shared runtime-link=shared,shared \
   -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
@@ -57,29 +57,29 @@ threading=multi link=static,shared runtime-link=shared,shared \
   -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
   --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
    --with-iostreams \
-   --with-python
-  #  --with-mpi
-  # --with-atomic \
-  # --with-chrono \
-  # --with-container \
-  # --with-context \
-  # --with-coroutine \
-  # --with-coroutine2 \
-  # --with-filesystem \
-  # --with-date_time \
-  # --with-exception \
-  # --with-graph \
-  # --with-graph_parallel \
-  # --with-log \
-  # --with-locale \
-  # --with-system  \
-  # --with-math \
-  # --with-program_options \
-  # --with-test --with-thread \
-  # --with-timer \
-  # --with-type_erasure \
-  # --with-wave \
-  # --with-random \
-  # --with-regex \
-  # --with-signals \
-  # --with-serialization
+   --with-python \
+  --with-mpi \
+  --with-atomic \
+  --with-chrono \
+  --with-container \
+  --with-context \
+  --with-coroutine \
+  --with-coroutine2 \
+  --with-filesystem \
+  --with-date_time \
+  --with-exception \
+  --with-graph \
+  --with-graph_parallel \
+  --with-log \
+  --with-locale \
+  --with-system  \
+  --with-math \
+  --with-program_options \
+  --with-test --with-thread \
+  --with-timer \
+  --with-type_erasure \
+  --with-wave \
+  --with-random \
+  --with-regex \
+  --with-signals \
+  --with-serialization
