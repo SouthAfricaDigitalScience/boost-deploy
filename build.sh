@@ -8,6 +8,7 @@ module  add  readline
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
+module  add icu/1_59-gcc-${GCC_VERSION}
 mkdir -p ${WORKSPACE}
 mkdir -p ${SOFT_DIR}
 mkdir -p ${SRC_DIR}
@@ -42,44 +43,53 @@ tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 ls ${WORKSPACE}
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
 #mv -n --strip-trailing-slashes ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
+export BOOST_HAS_ICU
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 ./bootstrap.sh \
 --prefix=$SOFT_DIR/${NAME}-${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
---with-toolset=gcc --with-python-root=$PYTHON_DIR
+--with-toolset=gcc \
+--with-python-root=$PYTHON_DIR \
+--with-icu=${ICU_DIR} \
+--with-libraries=all
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
 echo "Making python bindings"
-echo "using python : 2.7 : ${PYTHON_DIR}/bin/python2.7 : ${PYTHON_DIR}/include : ${PYTHON_DIR}/lib ;" >> project-config.jam
-./b2 -d+2 stage \
-threading=multi link=static,shared runtime-link=shared,shared \
-  -sMPI_PATH=${OPENMPI_DIR} --debug-configuration \
-  -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
-  -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
-  --prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
-   --with-iostreams \
-   --with-python \
-  --with-mpi \
-  --with-atomic \
-  --with-chrono \
-  --with-container \
-  --with-context \
-  --with-coroutine \
-  --with-coroutine2 \
-  --with-filesystem \
-  --with-date_time \
-  --with-exception \
-  --with-graph \
-  --with-graph_parallel \
-  --with-log \
-  --with-locale \
-  --with-system  \
-  --with-math \
-  --with-program_options \
-  --with-test --with-thread \
-  --with-timer \
-  --with-type_erasure \
-  --with-wave \
-  --with-random \
-  --with-regex \
-  --with-signals \
-  --with-serialization
+sed -i 's#using python.*;$#using python : 2.7 : '"${PYTHON_DIR}/bin/python2.7"' : '"${PYTHON_DIR}/include"' : '"${PYTHON_DIR}/lib ;"'#g' project-config.jam
+
+./b2 -d+2 \
+threading=multi \
+link=static,shared runtime-link=shared,shared \
+runtime-link=shared \
+--debug-configuration \
+-sMPI_PATH=${OPENMPI_DIR} \
+-sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
+-sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
+-sICU_PATH=${ICU_DIR} \
+--prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--with-iostreams \
+ --with-python \
+--with-mpi \
+--with-atomic \
+--with-chrono \
+--with-container \
+--with-context \
+--with-coroutine \
+--with-coroutine2 \
+--with-filesystem \
+--with-date_time \
+--with-exception \
+--with-graph \
+--with-graph_parallel \
+--with-log \
+--with-locale \
+--with-system  \
+--with-math \
+--with-program_options \
+--with-test --with-thread \
+--with-timer \
+--with-type_erasure \
+--with-wave \
+--with-random \
+--with-regex \
+--with-signals \
+--with-serialization
