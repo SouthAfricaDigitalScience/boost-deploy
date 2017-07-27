@@ -6,52 +6,14 @@ module  add  readline
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
-module add icu/1_59-gcc-${GCC_VERSION}
+module add icu/59_1-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/
 
 # There is a check missing
-./b2 -d+2 \
-threading=multi \
-link=static,shared runtime-link=shared,shared \
-runtime-link=shared \
---debug-configuration \
--sMPI_PATH=${OPENMPI_DIR} \
--sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
--sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
--sICU_PATH=${ICU_DIR} \
---prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
---with-iostreams \
- --with-python \
---with-mpi \
---with-atomic \
---with-chrono \
---with-container \
---with-context \
---with-coroutine \
---with-coroutine2 \
---with-filesystem \
---with-date_time \
---with-exception \
---with-graph \
---with-graph_parallel \
---with-log \
---with-locale \
---with-system  \
---with-math \
---with-program_options \
---with-test --with-thread \
---with-timer \
---with-type_erasure \
---with-wave \
---with-random \
---with-regex \
---with-signals \
---with-serialization
+./b2 install
 
-
-ls
 mkdir -p modules
 (
 cat <<MODULE_FILE
@@ -67,7 +29,7 @@ moduule add readline
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
-module  add  icu
+module  add  icu/59_1-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
 setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)/$::env(VERSION)-mpi-$::env(OPENMPI_VERSION)-gcc-$::env(GCC_VERSION)
 setenv BOOST_ROOT $::env(BOOST_DIR)

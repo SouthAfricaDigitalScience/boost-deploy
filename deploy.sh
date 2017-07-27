@@ -8,12 +8,23 @@ module add readline
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
-module add  icu/1_59-gcc-${GCC_VERSION}
+module add  icu/59_1-gcc-${GCC_VERSION}
 REMOTE_VERSION=`echo ${VERSION} | sed "s/\\./\_/g"`
 
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}/
 echo "Cleaning"
 ./b2 --clean
+echo "reststarting bootstrap"
+./bootstrap.sh \
+--prefix=$SOFT_DIR/${NAME}-${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--with-toolset=gcc \
+--with-python-root=$PYTHON_DIR \
+ --with-python=${PYTHON_DIR}/bin/python2.7 \
+--with-icu=${ICU_DIR} \
+--with-libraries=all
+echo "Making mpi bindings"
+echo "using mpi ;" >> project-config.jam
+
 echo "Starting deploy build"
 ./b2 -d+2 install \
 threading=multi \

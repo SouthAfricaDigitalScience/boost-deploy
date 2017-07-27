@@ -8,8 +8,7 @@ module  add  readline
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
-module  add icu/1_59-gcc-${GCC_VERSION}
-mkdir -p ${WORKSPACE}
+module  add icu/59_1-gcc-${GCC_VERSION}
 mkdir -p ${SOFT_DIR}
 mkdir -p ${SRC_DIR}
 which python
@@ -49,12 +48,12 @@ cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 --prefix=$SOFT_DIR/${NAME}-${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
 --with-toolset=gcc \
 --with-python-root=$PYTHON_DIR \
+ --with-python=${PYTHON_DIR}/bin/python2.7 \
 --with-icu=${ICU_DIR} \
 --with-libraries=all
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
-echo "Making python bindings"
-sed -i 's#using python.*;$#using python : 2.7 : '"${PYTHON_DIR}/bin/python2.7"' : '"${PYTHON_DIR}/include"' : '"${PYTHON_DIR}/lib ;"'#g' project-config.jam
+# sed -i 's#using python.*;$#using python : 2.7 : '"${PYTHON_DIR}/bin/python2.7"' : '"${PYTHON_DIR}/include"' : '"${PYTHON_DIR}/lib ;"'#g' project-config.jam
 
 ./b2 -d+2 \
 threading=multi \
