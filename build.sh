@@ -41,11 +41,10 @@ fi
 tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 ls ${WORKSPACE}
 # this creates boost_1_55_0 | we would like it to follow our "." naming conventions
-#mv -n --strip-trailing-slashes ${WORKSPACE}/${NAME}_${REMOTE_VERSION} ${WORKSPACE}/${NAME}-${VERSION}
 export BOOST_HAS_ICU
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 ./bootstrap.sh \
---prefix=$SOFT_DIR/${NAME}-${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--prefix=$SOFT_DIR-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 --with-toolset=gcc \
 --with-python-root=$PYTHON_DIR \
  --with-python=${PYTHON_DIR}/bin/python2.7 \
@@ -53,7 +52,6 @@ cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 --with-libraries=all
 echo "Making mpi bindings"
 echo "using mpi ;" >> project-config.jam
-# sed -i 's#using python.*;$#using python : 2.7 : '"${PYTHON_DIR}/bin/python2.7"' : '"${PYTHON_DIR}/include"' : '"${PYTHON_DIR}/lib ;"'#g' project-config.jam
 
 ./b2 -d+2 \
 threading=multi \
@@ -64,7 +62,7 @@ runtime-link=shared \
 -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
 -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
 -sICU_PATH=${ICU_DIR} \
---prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --with-iostreams \
  --with-python \
 --with-mpi \
