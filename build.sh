@@ -44,7 +44,7 @@ ls ${WORKSPACE}
 export BOOST_HAS_ICU
 cd ${WORKSPACE}/${NAME}_${REMOTE_VERSION}
 ./bootstrap.sh \
---prefix=$SOFT_DIR-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+--prefix=$SOFT_DIR-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --with-toolset=gcc \
 --with-python-root=$PYTHON_DIR \
  --with-python=${PYTHON_DIR}/bin/python2.7 \
