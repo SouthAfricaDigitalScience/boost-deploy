@@ -6,6 +6,9 @@ Build, test and deploy scripts necessary to deploy BOOST C++ library by CODE-RAD
 
 # Versions
 
+  1. 1.62
+  2. 1.63
+
 # Dependencies
 
   * GCC
@@ -34,10 +37,6 @@ The MPI bndings are added to the project-config.jam :
 ```
 echo "using mpi ;" >> project-config.jam
 ```
-and then the python bindings are properly included :
-
-```sed -i 's#using python.*;$#using python : 2.7 : '"${PYTHON_DIR}/bin/python2.7"' : '"${PYTHON_DIR}/include"' : '"${PYTHON_DIR}/lib ;"'#g' project-config.jam
-```
 
 ## Configuration and build
 
@@ -53,7 +52,7 @@ runtime-link=shared \
 -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
 -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
 -sICU_PATH=${ICU_DIR} \
---prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--prefix=${SOFT_DIR}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION} \
 --with-iostreams \
  --with-python \
 --with-mpi \
