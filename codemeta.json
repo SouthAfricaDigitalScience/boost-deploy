@@ -1,0 +1,23 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0002-6607-7145",
+      "@type": "Person",
+      "email": "brucellino@gmail.com",
+      "name": "Bruce Becker",
+      "affiliation": "C.S.I.R. Meraka Institute"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/SouthAfricaDigitalScience/boost-deploy",
+  "datePublished": "2017-07-28",
+  "dateModified": "2017-07-28",
+  "dateCreated": "2017-07-28",
+  "description": "Build, test and deploy scripts necessary to deploy BOOST C++ library by CODE-RADE",
+  "keywords": "C++, libraries, Foundation Release 3, CODE-RADE",
+  "license": "Apache 2.0",
+  "title": "boost-deploy",
+  "version": "v0.0.1"
+}
