@@ -31,7 +31,7 @@ module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add python/2.7.13-gcc-${GCC_VERSION}
 module  add  icu/59_1-gcc-${GCC_VERSION}
 setenv BOOST_VERSION $VERSION
-setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
+setenv BOOST_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 setenv BOOST_ROOT $::env(BOOST_DIR)
 setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
 prepend-path CPATH $::env(BOOST_DIR)/include
