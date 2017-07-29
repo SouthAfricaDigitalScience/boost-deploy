@@ -70,26 +70,24 @@ mkdir -p ${LIBRARIES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
-## $NAME modulefile
+## boost modulefile
 ##
 proc ModulesHelp { } {
-    puts stderr "       This module does nothing but alert the user"
-    puts stderr "       that the [module-info name] module is not available"
+  puts stderr "\tAdds boost (1.62.0.) to your environment."
 }
-
+module-whatis "Sets the environment for using boost (1.62.0.) Built with GCC $GCC_VERSION and OpenMPI Version $OPENMPI_VERSION"
 module add bzip2
-module  add  readline
-module add gcc/${GCC_VERSION}
-module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add python/2.7.13-gcc-${GCC_VERSION}
-module add icu/1_59-gcc-${GCC_VERSION}
-module-whatis   "$NAME $VERSION : See https://github.com/SouthAfricaDigitalScience/${NAME}-deploy"
-setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/${VERSION)-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
-setenv BOOST_ROOT                      $::env(BOOST_DIR)
-setenv BOOST_VERSION                $::env(VERSION)
-prepend-path CFLAGS                     "-I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
-prepend-path PATH                          $::env(BOOST_DIR)/bin
-prepend-path LD_LIBRARY_PATH  $::env(BOOST_DIR)/lib
+module add readline
+module add gcc/$GCC_VERSION
+module add openmpi/$OPENMPI_VERSION-gcc-$GCC_VERSION
+module add python/$PYTHON_VERSION-gcc-$GCC_VERSION
+module  add  icu/59_1-gcc-$GCC_VERSION
+setenv BOOST_VERSION $VERSION
+setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/NAME/$VERSION-gcc-$GCC_VERSION-mpi-$OPENMPI_VERSION
+setenv BOOST_ROOT $::env(BOOST_DIR)
+setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
+prepend-path CPATH $::env(BOOST_DIR)/include
+prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)
 MODULE_FILE
 ) > ${LIBRARIES}/${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module avail ${NAME}
