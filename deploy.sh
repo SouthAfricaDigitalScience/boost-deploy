@@ -35,7 +35,7 @@ runtime-link=shared \
 -sBZIP2_BINARY=bz2 -sBZLIB_INCLUDE=${BZLIB_DIR}/include -sBZLIB_LIBDIR=${BZLIB_DIR}/lib \
 -sPYTHON_PATH=${PYTHONHOME} -sPYTHON_INCLUDE=${PYTHON_DIR}/include -sPYTHON_LIBDIR=${PYTHON_DIR}/lib \
 -sICU_PATH=${ICU_DIR} \
---prefix=${SOFT_DIR}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
+--prefix=$SOFT_DIR-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}  \
 --with-iostreams \
  --with-python \
 --with-mpi \
@@ -83,15 +83,15 @@ module add openmpi/$OPENMPI_VERSION-gcc-$GCC_VERSION
 module add python/$PYTHON_VERSION-gcc-$GCC_VERSION
 module  add  icu/59_1-gcc-$GCC_VERSION
 setenv BOOST_VERSION $VERSION
-setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/NAME/$VERSION-gcc-$GCC_VERSION-mpi-$OPENMPI_VERSION
+setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-$GCC_VERSION-mpi-$OPENMPI_VERSION
 setenv BOOST_ROOT $::env(BOOST_DIR)
 setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
 prepend-path CPATH $::env(BOOST_DIR)/include
 prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)
 MODULE_FILE
-) > ${LIBRARIES}/${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+) > ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 module avail ${NAME}
-module add ${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
 echo "LD_LIBRARY_PATH is : ${LD_LIBRARY_PATH}"
 which g++
 cd ${WORKSPACE}
