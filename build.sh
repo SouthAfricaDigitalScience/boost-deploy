@@ -25,7 +25,7 @@ if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ]
   echo "tarball's not here ! let's get it"
   echo "Getting it from sourceforge with the following command:"
   echo " wget http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}_${REMOTE_VERSION}.tar.gz -O ${SRC_DIR}/${SOURCE_FILE}"
-  wget http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}_${REMOTE_VERSION}.tar.gz -O ${SRC_DIR}/${SOURCE_FILE}
+  wget --no-check-certificate http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}_${REMOTE_VERSION}.tar.gz -O ${SRC_DIR}/${SOURCE_FILE}
   echo "releasing lock"
   rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
 elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then

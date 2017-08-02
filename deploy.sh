@@ -81,12 +81,11 @@ module add readline
 module add gcc/$GCC_VERSION
 module add openmpi/$OPENMPI_VERSION-gcc-$GCC_VERSION
 module add python/$PYTHON_VERSION-gcc-$GCC_VERSION
-module  add  icu/59_1-gcc-$GCC_VERSION
+module add  icu/59_1-gcc-$GCC_VERSION
 setenv BOOST_VERSION $VERSION
-setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-$GCC_VERSION-mpi-$OPENMPI_VERSION
+setenv BOOST_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/${NAME}/$VERSION-gcc-$GCC_VERSION-mpi-$OPENMPI_VERSION
 setenv BOOST_ROOT $::env(BOOST_DIR)
 setenv CFLAGS "$CFLAGS -I$::env(BOOST_DIR)/include -L$::env(BOOST_DIR)/lib"
-prepend-path CPATH $::env(BOOST_DIR)/include
 prepend-path LD_LIBRARY_PATH $::env(BOOST_DIR)
 MODULE_FILE
 ) > ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}-mpi-${OPENMPI_VERSION}
